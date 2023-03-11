@@ -1,0 +1,5 @@
+see:
+
+- https://www.baeldung.com/spring-boot-testing
+- https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html
+
