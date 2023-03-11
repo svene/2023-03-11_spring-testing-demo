@@ -18,6 +18,10 @@ dependencies {
 
 	testImplementation 'org.assertj:assertj-core:3.24.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	testImplementation 'org.postgresql:postgresql:42.2.24'
+	testImplementation "org.testcontainers:postgresql:1.17.6"
+
 }
 
 tasks.named('test') {
