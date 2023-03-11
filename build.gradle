@@ -3,6 +3,10 @@ plugins {
 	id 'org.springframework.boot' version '3.0.4'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
+ext {
+	DEP_LOMBOK_VERSION = '1.18.26'
+	slf4jVersion = '2.0.6'
+}
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -16,11 +20,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	implementation 'org.postgresql:postgresql:42.2.24'
+	implementation 'org.postgresql:postgresql:42.2.24'
+	implementation "org.testcontainers:postgresql:1.17.6"
+
+	annotationProcessor "org.projectlombok:lombok:${DEP_LOMBOK_VERSION}"
+	compileOnly "org.projectlombok:lombok:${DEP_LOMBOK_VERSION}"
+	testAnnotationProcessor "org.projectlombok:lombok:${DEP_LOMBOK_VERSION}"
+	testCompileOnly "org.projectlombok:lombok:${DEP_LOMBOK_VERSION}"
+
 	testImplementation 'org.assertj:assertj-core:3.24.2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	testImplementation 'org.postgresql:postgresql:42.2.24'
-	testImplementation "org.testcontainers:postgresql:1.17.6"
 
 }
 

@@ -14,7 +14,6 @@ public class DatabaseTest {
 
 	@BeforeAll
 	public static void startContainer() {
-		// Start a Postgres container
 		postgres = new PostgreSQLContainer<>("postgres:latest")
 			.withUsername("postgres")
 			.withPassword("password")
@@ -24,7 +23,6 @@ public class DatabaseTest {
 
 	@AfterAll
 	public static void stopContainer() {
-		// Stop the Postgres container
 		postgres.stop();
 	}
 
@@ -34,19 +32,17 @@ public class DatabaseTest {
 	}
 	@AfterEach
 	public void tearDown() throws SQLException {
-		// Close the database connection
 		conn.close();
 	}
 
 	private void setupDatabaseStructure() throws SQLException {
-		// Create a table and insert a row
+		// Create a table:
 		try (Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate("CREATE TABLE test_table (id SERIAL PRIMARY KEY, name VARCHAR(255));");
 		}
 	}
 
 	private void setupDatabaseData() throws SQLException {
-		// Verify that the row was inserted
 		try (Statement stmt = conn.createStatement()) {
 			stmt.executeUpdate("INSERT INTO test_table (name) VALUES ('test');");
 		}
@@ -57,6 +53,7 @@ public class DatabaseTest {
 		setupDatabaseStructure();
 		setupDatabaseData();
 
+		// Verify that one row was inserted:
 		try (Statement stmt = conn.createStatement()) {
 			ResultSet rs = stmt.executeQuery("SELECT COUNT(*) FROM test_table WHERE name = 'test';");
 			rs.next();
