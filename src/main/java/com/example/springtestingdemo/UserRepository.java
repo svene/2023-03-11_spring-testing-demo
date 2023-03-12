@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -28,6 +30,17 @@ public class UserRepository {
 			rs.next();
 			int count = rs.getInt(1);
 			return count;
+		}
+	}
+	public List<UserDTO> getUsers() throws SQLException {
+		List<UserDTO> result = new ArrayList<>();
+		try (Statement stmt = getConnection().createStatement()) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM test_table;");
+			while (rs.next()) {
+				UserDTO dto = UserDTO.builder().id(rs.getLong(1)).name(rs.getString(2)).build();
+				result.add(dto);
+			}
+			return result;
 		}
 	}
 
