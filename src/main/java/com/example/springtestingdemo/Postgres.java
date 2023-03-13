@@ -12,6 +12,9 @@ import java.sql.SQLException;
 @Slf4j
 public class Postgres {
 
+	public static final String USERNAME = "postgres";
+	public static final String PASSWORD = "password";
+	public static final String DB_NAME = "testdb";
 	public PostgreSQLContainer<?> container;
 
 	@PostConstruct
@@ -19,8 +22,8 @@ public class Postgres {
 		log.info("init");
 		// Start a Postgres container
 		container = new PostgreSQLContainer<>("postgres:latest")
-			.withUsername("postgres")
-			.withPassword("password")
+			.withUsername(USERNAME)
+			.withPassword(PASSWORD)
 			.withDatabaseName("testdb");
 		container.start();
 

@@ -2,4 +2,5 @@ see:
 
 - https://www.baeldung.com/spring-boot-testing
 - https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html
-
+- https://www.findinpath.com/spring-boot-dynamicpropertysource-postgres/
+- https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto.data-access.configure-custom-datasource
