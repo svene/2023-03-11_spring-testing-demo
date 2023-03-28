@@ -13,7 +13,7 @@ import java.sql.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest()
 @ContextConfiguration(initializers = PostgresInitializer.class)
 class PostgresIntegrationTest {
 
@@ -28,19 +28,6 @@ class PostgresIntegrationTest {
 	@Value("${spring.datasource.password}")
 	String password;
 
-
-	/*
-		@BeforeAll
-		public static void startContainer() {
-			PostgresInitializer.postgres.start();
-		}
-	*/
-/*
-	@AfterAll
-	public static void stopContainer() {
-		postgres.stop();
-	}
-*/
 	@BeforeEach
 	public void beforeEach() throws SQLException {
 		conn = DriverManager.getConnection(jdbcUrl, username, password);
