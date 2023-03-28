@@ -12,7 +12,8 @@ import java.util.stream.Stream;
 public class PostgresInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	public static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>()
-		.withReuse(true);
+//		.withReuse(true)
+		;
 
 	public static Map<String, String> getProperties() {
 		Startables.deepStart(Stream.of(/*redis, kafka, */postgres)).join();
