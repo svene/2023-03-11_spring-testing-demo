@@ -1,5 +1,6 @@
-package com.example.springtestingdemo.o2;
+package com.example.springtestingdemo.t1database00;
 
+import com.example.springtestingdemo.common.PostgresInitializer;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Value;

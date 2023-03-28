@@ -1,4 +1,4 @@
-package com.example.springtestingdemo.o2;
+package com.example.springtestingdemo.common;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
