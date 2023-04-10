@@ -8,6 +8,11 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
 repositories {
 	mavenCentral()
 }
@@ -20,7 +25,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.assertj:assertj-core:3.24.2'
 
-	testImplementation 'org.postgresql:postgresql:42.2.24'
+	testImplementation 'org.postgresql:postgresql:42.2.27'
 	testImplementation "org.testcontainers:postgresql:1.17.6"
 
 	testImplementation 'org.springframework.boot:spring-boot-devtools'
