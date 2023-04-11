@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.jdbc.JdbcTestUtils;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -36,6 +37,6 @@ public class MyJdbcTemplateTest {
 	@Test
 	void t2() {
 		dbInitializer.initialize();
-		assertThat(jdbcTemplate.queryForObject("select count(*) from test_table", Integer.class)).isEqualTo(1);
+		assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "test_table")).isEqualTo(1);
 	}
 }
