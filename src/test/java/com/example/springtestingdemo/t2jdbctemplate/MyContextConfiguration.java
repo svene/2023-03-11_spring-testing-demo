@@ -1,10 +1,11 @@
 package com.example.springtestingdemo.t2jdbctemplate;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.postgresql.ds.PGSimpleDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import javax.sql.DataSource;
 
@@ -16,25 +17,20 @@ import javax.sql.DataSource;
  */
 @TestConfiguration
 public class MyContextConfiguration {
-	@Value("${spring.datasource.url}")
-	String jdbcUrl;
+	@Autowired
+	PostgreSQLContainer<?> postgreSQLContainer;
 
-	@Value("${spring.datasource.username}")
-	String username;
-
-	@Value("${spring.datasource.password}")
-	String password;
-
-	@Bean
-	public DataSource myDataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl(jdbcUrl);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
-
-		return dataSource;
+@Bean
+DataSource myDataSource() {
+	if (!postgreSQLContainer.isRunning()) {
+		postgreSQLContainer.start(); // TODO: find a better solution
 	}
+	PGSimpleDataSource dataSource = new PGSimpleDataSource();
+	dataSource.setURL(postgreSQLContainer.getJdbcUrl());
+	dataSource.setUser(postgreSQLContainer.getUsername());
+	dataSource.setPassword(postgreSQLContainer.getPassword());
+	return dataSource;
+}
 
 	@Bean
 	JdbcTemplate jdbcTemplate() {

@@ -1,37 +1,36 @@
 package com.example.springtestingdemo.t1database00;
 
-import com.example.springtestingdemo.common.PostgresInitializer;
-import org.junit.jupiter.api.*;
+import com.example.springtestingdemo.develop.PostgresTestConfiguration;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.sql.*;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest()
-@ContextConfiguration(initializers = PostgresInitializer.class)
+@Import(PostgresTestConfiguration.class)
 class PostgresIntegrationTest {
 
 	private Connection conn;
 
-	@Value("${spring.datasource.url}")
-	String jdbcUrl;
-
-	@Value("${spring.datasource.username}")
-	String username;
-
-	@Value("${spring.datasource.password}")
-	String password;
+	@Autowired
+	DataSource dataSource;
 
 	@BeforeEach
 	public void beforeEach() throws SQLException {
-		conn = DriverManager.getConnection(jdbcUrl, username, password);
-		System.out.println(jdbcUrl);
+		conn = dataSource.getConnection();
 	}
 	@AfterEach
 	public void afterEach() throws SQLException {
