@@ -17,10 +17,16 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'org.assertj:assertj-core:3.24.2'
 
+	testImplementation "org.testcontainers:junit-jupiter:1.18.0"
+	testImplementation "org.testcontainers:testcontainers:1.18.0"
 	testImplementation 'org.postgresql:postgresql:42.2.24'
 	testImplementation "org.testcontainers:postgresql:1.17.6"
 
